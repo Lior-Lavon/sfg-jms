@@ -17,4 +17,7 @@ public class JmsConfig {
         converter.setTypeIdPropertyName("_type");
         return converter;
     }
+
+    // set up the queue name
+    public static final String MY_QUEUE = "my-hello-world";
 }
