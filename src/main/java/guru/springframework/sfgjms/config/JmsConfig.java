@@ -20,4 +20,7 @@ public class JmsConfig {
 
     // set up the queue name
     public static final String MY_QUEUE = "my-hello-world";
+
+    // send and receive queue name
+    public static final String MY_SEND_RCV_QUEUE = "replybacktome";
 }
