@@ -37,7 +37,8 @@ public class HelloMessageListener {
 //    Listen and respond to a message
     @JmsListener(destination = JmsConfig.MY_SEND_RCV_QUEUE)// register as a jmsListener and register to the queue
     public void listenForHello(@Payload HelloWorldMessage helloWorldMessage,
-                       @Headers MessageHeaders headers, Message message) throws JMSException {
+                       @Headers MessageHeaders headers, Message jmsMessage,
+                               org.springframework.messaging.Message springMessage) throws JMSException {
 
         // create the message to reply
         HelloWorldMessage payloadMsg = HelloWorldMessage.builder()
@@ -45,7 +46,11 @@ public class HelloMessageListener {
                 .message("World !!")
                 .build();
 
-        jmsTemplate.convertAndSend(message.getJMSReplyTo(), payloadMsg);
+        // using the spring version message api
+        //jmsTemplate.convertAndSend((Destination)springMessage.getHeaders().get("jms_replyTo"), "Got it!");
+
+        // using the native jms message api
+        jmsTemplate.convertAndSend(jmsMessage.getJMSReplyTo(), payloadMsg);
     }
 
 }
