@@ -23,15 +23,18 @@ public class HelloMessageListener {
         this.jmsTemplate = jmsTemplate;
     }
 
+//    Listen to a message , dont reply
     //    @Payload - tell spring to deserielise the message
-    @JmsListener(destination = JmsConfig.MY_QUEUE)// register as a jmsListener and register to the queue
-    public void listen(@Payload HelloWorldMessage helloWorldMessage,
-                       @Headers MessageHeaders headers, Message message){
-        //System.out.println("I got a message !!!");
+//    @JmsListener(destination = JmsConfig.MY_QUEUE)// register as a jmsListener and register to the queue
+//    public void listen(@Payload HelloWorldMessage helloWorldMessage,
+//                       @Headers MessageHeaders headers, Message message){
+//        System.out.println("I got a message !!!");
+//
+//        System.out.println(helloWorldMessage);
+//    }
 
-        //System.out.println(helloWorldMessage);
-    }
 
+//    Listen and respond to a message
     @JmsListener(destination = JmsConfig.MY_SEND_RCV_QUEUE)// register as a jmsListener and register to the queue
     public void listenForHello(@Payload HelloWorldMessage helloWorldMessage,
                        @Headers MessageHeaders headers, Message message) throws JMSException {

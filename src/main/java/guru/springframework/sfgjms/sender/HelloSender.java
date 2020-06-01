@@ -26,19 +26,22 @@ public class HelloSender {
         this.objectMapper = objectMapper;
     }
 
+
+//    Send single message
 //    @Scheduled(fixedRate = 4000) // automate 2sec delay
-    public void sendMessage(){
+//    public void sendMessage(){
+//
+//        // create the message
+//        HelloWorldMessage message = HelloWorldMessage.builder()
+//                .id(UUID.randomUUID())
+//                .message("Hello World!")
+//                .build();
+//
+//        // send the message to ActiveMQ
+//        jmsTemplate.convertAndSend(JmsConfig.MY_QUEUE, message);
+//    }
 
-        // create the message
-        HelloWorldMessage message = HelloWorldMessage.builder()
-                .id(UUID.randomUUID())
-                .message("Hello World!")
-                .build();
-
-        // send the message to ActiveMQ
-        jmsTemplate.convertAndSend(JmsConfig.MY_QUEUE, message);
-    }
-
+//    Send a message and Listen for replay
     @Scheduled(fixedRate = 4000) // automate 2sec delay
     public void sendAndReceiveMessage() throws JMSException {
 
@@ -58,7 +61,6 @@ public class HelloSender {
                     helloMessage.setStringProperty("_type", "guru.springframework.sfgjms.model.HelloWorldMessage");
 
                     System.out.println("Sending hello");
-
                     return helloMessage;
 
                 } catch (JsonProcessingException e) {
